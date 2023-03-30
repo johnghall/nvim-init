@@ -19,11 +19,20 @@ else
 fi
 
 ### dotfiles ###
-cp dotfiles/. ~
+cp -r dotfiles/. ~
 
 ### zsh ###
 chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Plugins
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# Edit ~/.zshrc
+sed -i 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
+sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)/g' ~/.zshrc
 
 ### Neovim ###
 git clone https://github.com/neovim/neovim
@@ -50,3 +59,6 @@ tmux new-session -d
 source ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 tmux kill-server
 
+Blue='\033[0;34m'
+Green='\033[0;32m'
+echo "${Green}setup complete, cross your fingers and run ${Blue}exec $SHELL"
