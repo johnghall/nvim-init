@@ -19,10 +19,12 @@ else
 fi
 
 ### dotfiles ###
-cp -r dotfiles/. ~
+ln -s "$(pwd)/dotfiles/.p10k.zsh" ~/.p10k.zsh
+ln -s "$(pwd)/dotfiles/.tmux.conf" ~/.tmux.conf
 
 ### zsh ###
 chsh -s $(which zsh)
+export RUNZSH=no
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Plugins
@@ -31,16 +33,22 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Edit ~/.zshrc
-sed -i 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
-sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)/g' ~/.zshrc
+sed -i .bak 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
+sed -i .bak 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)/g' ~/.zshrc
+
+start_snippet='if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then\n  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"\nfi\n\n'
+end_snippet='[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\n'
+echo -e "${start_snippet}$(cat ~/.zshrc)" > ~/.zshrc
+echo -e "$(cat ~/.zshrc)\n${end_snippet}" > ~/.zshrc
+echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
 
 ### Neovim ###
-git clone https://github.com/neovim/neovim
-cd neovim
-git checkout stable
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
-cd .. && rm -rf neovim
+# git clone https://github.com/neovim/neovim
+# cd neovim
+# git checkout stable
+# make CMAKE_BUILD_TYPE=RelWithDebInfo
+# sudo make install
+# cd .. && rm -rf neovim
 
 # Configs
 if [ -d ~/.config/nvim ]; then
@@ -49,15 +57,18 @@ if [ -d ~/.config/nvim ]; then
 fi
 
 mkdir -p ~/.config
-cp -R nvim ~/.config
+ln -s "$(pwd)/nvim" ~/.config/nvim
 
 ### tmux ###
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/tpm
 tmux source ~/.tmux.conf
 tmux start-server
 tmux new-session -d
-source ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+cd ~/.tmux/plugins/tpm/scripts
+bash $(pwd)/install_plugins.sh
 tmux kill-server
+cd ~
 
 Blue='\033[0;34m'
 Green='\033[0;32m'
