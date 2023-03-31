@@ -1,5 +1,4 @@
 return {
-	{ "theprimeagen/harpoon" },
 	{ "rose-pine/neovim", name = "rose-pine" },
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
