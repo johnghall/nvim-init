@@ -1,3 +1,1 @@
-- disable p10k prompt
 - centos7 support
-- fix tmux
