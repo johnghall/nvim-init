@@ -43,12 +43,12 @@ echo -e "$(cat ~/.zshrc)\n${end_snippet}" > ~/.zshrc
 echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
 
 ### Neovim ###
-# git clone https://github.com/neovim/neovim
-# cd neovim
-# git checkout stable
-# make CMAKE_BUILD_TYPE=RelWithDebInfo
-# sudo make install
-# cd .. && rm -rf neovim
+git clone https://github.com/neovim/neovim
+cd neovim
+git checkout stable
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+cd .. && rm -rf neovim
 
 # Configs
 if [ -d ~/.config/nvim ]; then
@@ -58,17 +58,6 @@ fi
 
 mkdir -p ~/.config
 ln -s "$(pwd)/nvim" ~/.config/nvim
-
-### tmux ###
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins/tpm
-tmux source ~/.tmux.conf
-tmux start-server
-tmux new-session -d
-cd ~/.tmux/plugins/tpm/scripts
-bash $(pwd)/install_plugins.sh
-tmux kill-server
-cd ~
 
 Blue='\033[0;34m'
 Green='\033[0;32m'
