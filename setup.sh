@@ -6,12 +6,12 @@ if [[ $(uname -s) == "Darwin" ]]; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 
-    brew install zsh
+    brew install zsh fzf
     xcode-select --install
     brew install ninja libtool cmake pkgconfig gettext
 elif [[ $(lsb_release -si) == "Ubuntu" ]]; then
     sudo apt update
-    sudo apt install -y zsh
+    sudo apt install -y zsh fzf
     sudo apt-get install ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl
 else
     echo "Unsupported operating system"
@@ -31,10 +31,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 
 # Edit ~/.zshrc
 sed -i .bak 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
-sed -i .bak 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)/g' ~/.zshrc
+sed -i .bak 's/plugins=(git)/plugins=(fzf-tab git zsh-autosuggestions zsh-syntax-highlighting web-search rust 1password colored-man-pages)/g' ~/.zshrc
 
 start_snippet='if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then\n  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"\nfi\n\n'
 end_snippet='[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\n'
