@@ -21,6 +21,7 @@ fi
 ### dotfiles ###
 ln -s "$(pwd)/dotfiles/.p10k.zsh" ~/.p10k.zsh
 ln -s "$(pwd)/dotfiles/.tmux.conf" ~/.tmux.conf
+ln -s "$(pwd)/dotfiles/.spaceshiprc.zsh" ~/.spaceshiprc.zsh
 
 ### zsh ###
 chsh -s $(which zsh)
@@ -28,20 +29,15 @@ export RUNZSH=no
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Plugins
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 
 # Edit ~/.zshrc
-sed -i .bak 's/robbyrussell/powerlevel10k\/powerlevel10k/g' ~/.zshrc
+sed -i .bak 's/robbyrussell/spaceship/g' ~/.zshrc
 sed -i .bak 's/plugins=(git)/plugins=(fzf-tab git zsh-autosuggestions zsh-syntax-highlighting web-search rust 1password colored-man-pages)/g' ~/.zshrc
-
-start_snippet='if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then\n  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"\nfi\n\n'
-end_snippet='[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\n'
-echo -e "${start_snippet}$(cat ~/.zshrc)" > ~/.zshrc
-echo -e "$(cat ~/.zshrc)\n${end_snippet}" > ~/.zshrc
-echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
 
 ### Neovim ###
 git clone https://github.com/neovim/neovim
