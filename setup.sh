@@ -61,6 +61,8 @@ fi
 mkdir -p ~/.config
 ln -s "$(pwd)/nvim" ~/.config/nvim
 
+tmux source ~/.tmux.conf
+
 Blue='\033[0;34m'
 Green='\033[0;32m'
-echo "${Green}setup complete, cross your fingers and run ${Blue}exec $SHELL"
+echo "${Green}setup complete, cross your fingers and run ${Blue}exec \$SHELL"
