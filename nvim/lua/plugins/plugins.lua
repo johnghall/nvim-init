@@ -22,7 +22,10 @@ return {
 	{ "vim-scripts/ReplaceWithRegister" },
 	{ "numToStr/Comment.nvim" },
 	{ "nvim-tree/nvim-tree.lua" },
-	{ "kyazdani42/nvim-web-devicons" },
+	{ "nvim-tree/nvim-web-devicons" },
+	{ "folke/trouble.nvim" },
+	{ "folke/todo-comments.nvim" },
+	{ "folke/which-key.nvim" },
 	{ "nvim-lualine/lualine.nvim" },
 	{ "lewis6991/gitsigns.nvim" },
 	{
