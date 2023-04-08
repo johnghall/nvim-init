@@ -36,4 +36,6 @@ return {
 	{
 		"zbirenbaum/copilot-cmp",
 	},
+	{ "mfussenegger/nvim-dap" },
+	{ "rcarriga/nvim-dap-ui" },
 }
