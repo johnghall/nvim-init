@@ -11,6 +11,7 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 	},
+	{ "nvim-telescope/telescope-dap.nvim" },
 	{ "christoomey/vim-tmux-navigator" },
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{ "windwp/nvim-autopairs" },
@@ -38,4 +39,8 @@ return {
 	},
 	{ "mfussenegger/nvim-dap" },
 	{ "rcarriga/nvim-dap-ui" },
+	{ "theHamsta/nvim-dap-virtual-text" },
+	{ "folke/neodev.nvim" },
+	{ "antoinemadec/FixCursorHold.nvim" },
+	{ "nvim-neotest/neotest" },
 }
