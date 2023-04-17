@@ -73,4 +73,4 @@ end
 
 dapui.setup()
 
-require("nvim-dap-virtual0-text").setup()
+require("nvim-dap-virtual-text").setup({})
