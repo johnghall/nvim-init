@@ -43,4 +43,5 @@ return {
 	{ "folke/neodev.nvim" },
 	{ "antoinemadec/FixCursorHold.nvim" },
 	{ "nvim-neotest/neotest" },
+	{ "mxsdev/nvim-dap-vscode-js" },
 }
