@@ -13,6 +13,8 @@ elif [[ $(lsb_release -si) == "Ubuntu" ]]; then
     sudo apt update
     sudo apt install -y zsh fzf
     sudo apt-get install ninja-build gettext libtool-bin cmake g++ pkg-config unzip curl
+elif [[ $(uname -n) == "archlinux" ]]; then
+    paru -S zsh fzf base-devel cmake unzip ninja curl
 else
     echo "Unsupported operating system"
     exit 1
