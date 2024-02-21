@@ -14,7 +14,8 @@ return {
 	{ "nvim-telescope/telescope-dap.nvim" },
 	{ "christoomey/vim-tmux-navigator" },
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-	{ "windwp/nvim-autopairs" },
+	-- disable autopairs and use copilot for now
+	-- { "windwp/nvim-autopairs" },
 	{ "windwp/nvim-ts-autotag" },
 	{ "mbbill/undotree" },
 	{ "tpope/vim-fugitive" },
